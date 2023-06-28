@@ -1,5 +1,6 @@
-import './globals.css'
+import Link from 'next/link'
 import { Inter } from 'next/font/google'
+import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -15,7 +16,19 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <nav>
+          <ul className='flex gap-2 mb-4'>
+            {['', 'about', 'news', 'contact'].map((page) => (
+              <li key={page}>
+                <Link className='underline' href={`/${page}`}>
+                  {page ? page.slice(0, 1).toUpperCase() + page.slice(1) : 'Top'}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+        {children}</body>
     </html>
   )
 }
